@@ -1,0 +1,10 @@
+numpy
+matplotlib
+streamlit
+panel
+bokeh
+param
+pyvista
+geovista
+stpyvista
+rasterio
