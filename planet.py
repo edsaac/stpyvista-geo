@@ -19,7 +19,7 @@ st.set_page_config(
 
 if "IS_XVFB_RUNNING" not in st.session_state:
     IS_XVFB_RUNNING = is_xvfb()
-    st.session_state.IS_XVFB_RUNNING = IS_XVFB_RUNNING()
+    st.session_state.IS_XVFB_RUNNING = IS_XVFB_RUNNING
     
     # Inform xvfb status with a toast
     if not IS_APP_EMBED: st.toast(IS_XVFB_RUNNING.message, icon=IS_XVFB_RUNNING.icon)
