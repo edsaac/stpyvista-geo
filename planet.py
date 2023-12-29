@@ -98,12 +98,19 @@ with cols[0]:
             "**CONUS Temperature** <br /> **on Chrismas Eve**",
             unsafe_allow_html=True
         )
+        
+        btn = st.button(
+            "Click here to load", 
+            use_container_width=True,
+            help="This might take a while depending on your device"
+        )
+        
         st.markdown("""
             <p style="text-align:right;">▟</>
                     """,unsafe_allow_html=True)
 
 with cols[1]:
-
+    
     subcols = st.columns(2)
     with subcols[0]:
         container_min = st.container()
@@ -118,16 +125,16 @@ with cols[1]:
             font_size=16,
             shadow=True,
         )
-
-        with container_min:
-            stpyvista(
-                earth_min,
-                panel_kwargs=dict(
-                    orientation_widget=True, 
-                    interactive_orientation_widget=True
+        if btn:
+            with container_min:
+                stpyvista(
+                    earth_min,
+                    panel_kwargs=dict(
+                        orientation_widget=True, 
+                        interactive_orientation_widget=True
+                    )
                 )
-            )
-    
+        
     with subcols[1]:
         container_max = st.container()
         # visible_layer_2 = st.checkbox("Show layer?", True, key="chk_max")
@@ -142,11 +149,12 @@ with cols[1]:
             shadow=True,
         )
 
-        with container_max:
-            stpyvista(
-                earth_max,
-                panel_kwargs=dict(
-                    orientation_widget=True, 
-                    interactive_orientation_widget=True
+        if btn:
+            with container_max:
+                stpyvista(
+                    earth_max,
+                    panel_kwargs=dict(
+                        orientation_widget=True, 
+                        interactive_orientation_widget=True
+                    )
                 )
-            )
