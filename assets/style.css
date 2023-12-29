@@ -1,11 +1,11 @@
 h1 {
-    font-size: 5rem;
+    font-size: 2.5rem;
     text-align: center;
     top: 0;
 }
 
 h2 {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     text-align: center;
     top: 0;
 }
@@ -16,6 +16,18 @@ h3 {
     top: 0;
     margin-left: 20%;
     margin-right: 20%;
+}
+
+h5 {
+    font-size: 0.9rem;
+    text-align: center;
+    top: 0;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+p{
+    font-size: 0.9rem;
 }
 
 [data-testid='stSidebarNav'] > ul {
