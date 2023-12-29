@@ -28,6 +28,7 @@ h5 {
 
 p{
     font-size: 0.9rem;
+    text-align: center;
 }
 
 [data-testid='stSidebarNav'] > ul {
@@ -36,4 +37,12 @@ p{
 
 iframe[title='stpyvista.stpyvista']{
     border-radius: 10px;
+}
+
+section.main div[data-testid="block-container"]{
+    padding-top: 1rem;
+}
+
+header[data-testid="stHeader"]{
+    visibility: hidden;
 }
