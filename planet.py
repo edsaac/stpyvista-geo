@@ -14,7 +14,7 @@ IS_APP_EMBED = st.session_state.IS_APP_EMBED
 st.set_page_config(
     page_title="stpyvista + geovista",
     page_icon="🧊", 
-    layout="wide" if IS_APP_EMBED else "centered", 
+    layout="wide", 
     initial_sidebar_state="collapsed")
 
 if "IS_XVFB_RUNNING" not in st.session_state:
