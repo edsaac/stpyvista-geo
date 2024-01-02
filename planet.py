@@ -95,7 +95,7 @@ with cols[0]:
         "***"
         "## 🧑‍🎄"
         st.markdown(
-            "**CONUS Temperature** <br /> **on Chrismas Eve**",
+            "**CONUS Temperature** <br /> **on Christmas Eve**",
             unsafe_allow_html=True
         )
         
