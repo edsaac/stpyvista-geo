@@ -54,7 +54,7 @@ def stpv_add_raster(filename):
     plotter.set_background("#0e1117")
     plotter.add_base_layer(texture=gv.blue_marble())
     plotter.add_graticule(mesh_args=dict(color="pink", opacity=0.4))
-    plotter.add_coastlines(color="white", line_width=8)
+    plotter.add_coastlines(color="white", line_width=8, resolution="50m")
     plotter.view_xz(negative=False)
 
     plotter.add_text(
@@ -85,6 +85,9 @@ TIFF = {
     "Max": "assets/tiff/us.tmax_nohads_ll_20231224_float.tif"
 }
 
+if "rendered" not in st.session_state:
+    st.session_state.rendered = False
+
 cols = st.columns([0.5,2])
 
 with cols[0]:
@@ -99,18 +102,25 @@ with cols[0]:
             unsafe_allow_html=True
         )
         
-        btn = st.button(
-            "Click here to load", 
-            use_container_width=True,
-            help="This might take a while depending on your device"
-        )
-        
         st.markdown("""
             <p style="text-align:right;">▟</>
                     """,unsafe_allow_html=True)
 
 with cols[1]:
-    
+    if not st.session_state.rendered:
+        btn_container = st.empty()
+        btn = btn_container.button(
+            "Click here to load", 
+            use_container_width=True,
+            help="This might take a while depending on your device"
+        )
+    else:
+        btn = True
+
+    if btn:
+        st.session_state.rendered = True
+        btn_container.empty()
+
     subcols = st.columns(2)
     with subcols[0]:
         container_min = st.container()
@@ -125,15 +135,16 @@ with cols[1]:
             font_size=16,
             shadow=True,
         )
-        if btn:
+        if st.session_state.rendered:
             with container_min:
-                stpyvista(
-                    earth_min,
-                    panel_kwargs=dict(
-                        orientation_widget=True, 
-                        interactive_orientation_widget=True
+                with st.spinner("Loading..."):
+                    stpyvista(
+                        earth_min,
+                        panel_kwargs=dict(
+                            orientation_widget=True, 
+                            interactive_orientation_widget=True
+                        )
                     )
-                )
         
     with subcols[1]:
         container_max = st.container()
@@ -149,12 +160,13 @@ with cols[1]:
             shadow=True,
         )
 
-        if btn:
+        if st.session_state.rendered:
             with container_max:
-                stpyvista(
-                    earth_max,
-                    panel_kwargs=dict(
-                        orientation_widget=True, 
-                        interactive_orientation_widget=True
+                with st.spinner("Loading..."):
+                    stpyvista(
+                        earth_max,
+                        panel_kwargs=dict(
+                            orientation_widget=True, 
+                            interactive_orientation_widget=True
+                        )
                     )
-                )
