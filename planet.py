@@ -99,9 +99,13 @@ with cols[0]:
         "## 🧑‍🎄"
         st.markdown(
             "**CONUS Temperature** <br /> **on Christmas Eve**",
-            help="Data from [NOOA National Weather Service](https://www.cpc.ncep.noaa.gov/products/GIS/GIS_DATA/)",
             unsafe_allow_html=True
         )
+
+        st.caption(
+            "Data from <br /> [NOOA National Weather Service](https://www.cpc.ncep.noaa.gov/products/GIS/GIS_DATA/)",
+            unsafe_allow_html=True
+        )        
         
         st.markdown("""
             <p style="text-align:right;">▟</>

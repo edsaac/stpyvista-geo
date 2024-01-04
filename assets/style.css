@@ -29,6 +29,7 @@ h5 {
 p{
     font-size: 0.9rem;
     text-align: center;
+    line-height: 95%;
 }
 
 [data-testid='stSidebarNav'] > ul {
@@ -45,4 +46,16 @@ section.main div[data-testid="block-container"]{
 
 header[data-testid="stHeader"]{
     visibility: hidden;
+}
+
+[data-testid="stCaptionContainer"]{
+    opacity: 0.5;
+    font-size: 0.7rem;
+    line-height: 95%;
+    transition: all .2s ease-in-out;
+}
+
+[data-testid="stCaptionContainer"]:hover{
+    opacity: 1;
+    transform: scale(1.2); 
 }
