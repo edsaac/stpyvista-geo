@@ -52,11 +52,14 @@ def stpv_add_raster(filename):
     )
     return plotter
 
+TIFF = {
+    "Min": "assets/tiff/us.tmin_nohads_ll_20231224_float.tif",
+    "Max": "assets/tiff/us.tmax_nohads_ll_20231224_float.tif"
+}
+
 async def build_column(column, tiff):
-    TIFF = {
-        "Min": "assets/tiff/us.tmin_nohads_ll_20231224_float.tif",
-        "Max": "assets/tiff/us.tmax_nohads_ll_20231224_float.tif"
-    }
+
+    global TIFF
 
     with column:
         with st.spinner("🌎🌍🌏..."):
@@ -167,12 +170,15 @@ async def main():
                 # async with asyncio.TaskGroup() as tg:
                 #     e1 = tg.create_task(build_column(subcols[0], "Min"))
                 #     e2 = tg.create_task(build_column(subcols[1], "Max"))
-                
                 # print(e1, e2)
                 
+                # task1 = asyncio.create_task(build_column(subcols[0], "Min"))
+                # task2 = asyncio.create_task(build_column(subcols[1], "Max"))
+                # await task1
+                # await task2
+
                 st.session_state.rendered = await asyncio.gather(
-                    build_column(subcols[0], "Min"),
-                    build_column(subcols[1], "Max")
+                    *[build_column(c,t) for c,t in zip(subcols, TIFF.keys())]
                 )
 
 
