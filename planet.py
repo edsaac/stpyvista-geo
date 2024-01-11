@@ -11,6 +11,8 @@ if "IS_APP_EMBED" not in st.session_state:
     st.session_state.IS_APP_EMBED = is_embed()
 IS_APP_EMBED = st.session_state.IS_APP_EMBED
 
+print(f"{IS_APP_EMBED = }")
+
 st.set_page_config(
     page_title="stpyvista + geovista",
     page_icon="🧊", 
