@@ -88,7 +88,7 @@ TIFF = {
 if "rendered" not in st.session_state:
     st.session_state.rendered = [False, False]
 
-cols = st.columns([0.5,2])
+cols = st.columns([0.5,2]) if not IS_APP_EMBED else st.columns([1,0.01])
 
 with cols[0]:
     with st.expander("▛", expanded=True):
@@ -110,73 +110,79 @@ with cols[0]:
         st.markdown("""
             <p style="text-align:right;">▟</>
                     """,unsafe_allow_html=True)
+    
+    if IS_APP_EMBED:
+        st.markdown("""
+            <p class="embed_message" style="text-align:right;">Launch <b>fullscreen</b> to explore &emsp; <b>⇲</b></>
+                    """,unsafe_allow_html=True)
 
-with cols[1]:
+if not IS_APP_EMBED:
+    with cols[1]:
 
-    btn_container = st.empty()
+        btn_container = st.empty()
 
-    if not all(st.session_state.rendered):
-        btn = btn_container.button(
-            "Click here to load", 
-            use_container_width=True,
-            help="This might take a while depending on your device"
-        )
-    else:
-        btn = True
+        if not all(st.session_state.rendered):
+            btn = btn_container.button(
+                "Click here to load", 
+                use_container_width=True,
+                help="This might take a while depending on your device"
+            )
+        else:
+            btn = True
 
-    if btn:
-        # btn_container.empty()
+        if btn:
+            # btn_container.empty()
 
-        subcols = btn_container.columns(2)
+            subcols = btn_container.columns(2)
 
-        # with Pool() as pool:
-        #     earths = pool.map(stpv_add_raster, TIFF.values())
-        earths = [stpv_add_raster(r) for r in TIFF.values()]        
-        earth_min, earth_max = earths
-        
-        # earth_min.actors['Temperature'].visibility = visible_layer_min
-        earth_min.add_text(
-            "🌎 Minimum",
-            position="upper_left",
-            color="w",
-            font_size=16,
-            shadow=True,
-        )
-
-        # earth_max.actors['Temperature'].visibility = visible_layer_2
-        earth_max.add_text(
-                "🌎 Maximum",
+            # with Pool() as pool:
+            #     earths = pool.map(stpv_add_raster, TIFF.values())
+            earths = [stpv_add_raster(r) for r in TIFF.values()]        
+            earth_min, earth_max = earths
+            
+            # earth_min.actors['Temperature'].visibility = visible_layer_min
+            earth_min.add_text(
+                "🌎 Minimum",
                 position="upper_left",
                 color="w",
                 font_size=16,
                 shadow=True,
             )
-        
-        with subcols[0]:
-            
-            if not st.session_state.rendered[0]:
-                with st.spinner("🌎🌍🌏..."):
-                    stpyvista(
-                        earth_min,
-                        panel_kwargs=dict(
-                            orientation_widget=True, 
-                            interactive_orientation_widget=True
-                        )
-                    )
-                st.session_state.rendered[0] = True
-                
 
-        with subcols[1]:
+            # earth_max.actors['Temperature'].visibility = visible_layer_2
+            earth_max.add_text(
+                    "🌎 Maximum",
+                    position="upper_left",
+                    color="w",
+                    font_size=16,
+                    shadow=True,
+                )
             
-            if not st.session_state.rendered[1]:
-                with st.spinner("🌎🌍🌏..."):
-                    stpyvista(
-                        earth_max,
-                        panel_kwargs=dict(
-                            orientation_widget=True, 
-                            interactive_orientation_widget=True
-                        )
-                    )
+            with subcols[0]:
                 
-                st.session_state.rendered[1] = True
+                if not st.session_state.rendered[0]:
+                    with st.spinner("🌎🌍🌏..."):
+                        stpyvista(
+                            earth_min,
+                            panel_kwargs=dict(
+                                orientation_widget=True, 
+                                interactive_orientation_widget=True
+                            )
+                        )
+                    st.session_state.rendered[0] = True
+                    
+
+            with subcols[1]:
+                
+                if not st.session_state.rendered[1]:
+                    with st.spinner("🌎🌍🌏..."):
+                        stpyvista(
+                            earth_max,
+                            panel_kwargs=dict(
+                                orientation_widget=True, 
+                                interactive_orientation_widget=True
+                            )
+                        )
+                    
+                    st.session_state.rendered[1] = True
             

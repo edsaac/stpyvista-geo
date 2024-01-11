@@ -60,6 +60,22 @@ header[data-testid="stHeader"]{
     transform: scale(1.2); 
 }
 
+@keyframes emphasis {
+    from{ 
+        opacity: 0.4;
+        margin-right: 15%;
+    }
+    to{
+        opacity: 1;
+        margin-right: 0%;
+    }
+}
+
+.embed_message{
+    animation-name: emphasis;
+    animation-duration: 2s;
+}
+
 /* .stSpinner{
     margin-top: 20%;
 }
