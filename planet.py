@@ -19,8 +19,11 @@ def get_grid(filename:str):
 
     return gv.Transform.from_1d(x,y, data=np.ma.masked_equal(band, 0), name="Temperature [C]")
 
+async def get_grid_async(filename:str):
+    return await asyncio.to_thread(get_grid, filename)
+
 @st.cache_resource
-def stpv_add_raster(filename):
+async def stpv_add_raster(filename):
     plotter = gv.GeoPlotter()
     plotter.window_size = [600, 600]
     plotter.set_background("#0e1117")
@@ -38,7 +41,8 @@ def stpv_add_raster(filename):
         shadow=True,
     )
 
-    blob = get_grid(filename)
+    blob = await get_grid_async(filename)
+
     plotter.add_mesh(
         blob, 
         show_edges=False, 
@@ -52,6 +56,9 @@ def stpv_add_raster(filename):
     )
     return plotter
 
+async def stpv_add_raster_async(filename:str):
+    return await asyncio.to_thread(stpv_add_raster, filename)
+
 TIFF = {
     "Min": "assets/tiff/us.tmin_nohads_ll_20231224_float.tif",
     "Max": "assets/tiff/us.tmax_nohads_ll_20231224_float.tif"
@@ -64,7 +71,7 @@ async def build_column(column, tiff):
     with column:
         with st.spinner("🌎🌍🌏..."):
             # await asyncio.sleep(10)
-            earth = stpv_add_raster(TIFF.get(tiff))
+            earth = await stpv_add_raster_async(TIFF.get(tiff))
             # earth.actors['Temperature'].visibility = visible_layer_min
             
             message = "Minimum" if tiff == "Min" else "Maximum"
