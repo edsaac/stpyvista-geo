@@ -59,3 +59,24 @@ header[data-testid="stHeader"]{
     opacity: 1;
     transform: scale(1.2); 
 }
+
+/* .stSpinner{
+    margin-top: 20%;
+}
+ 
+.stSpinner div{
+    margin: 0 auto;
+} 
+
+.stSpinner i{
+    height: 3rem;
+    width: 3rem;
+    border-width: 0.8rem;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.stSpinner p{
+    font-size: 3rem;
+    line-height: 95%;
+} */

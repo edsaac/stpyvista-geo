@@ -1,10 +1,10 @@
 import streamlit as st
-import pyvista as pv
 import geovista as gv
 from stpyvista import stpyvista
 import numpy as np
 from stpyvista_utils import is_embed, is_xvfb
 import colorcet as cc
+# from multiprocessing import Pool
 
 # Initial configuration
 if "IS_APP_EMBED" not in st.session_state:
@@ -86,7 +86,7 @@ TIFF = {
 }
 
 if "rendered" not in st.session_state:
-    st.session_state.rendered = False
+    st.session_state.rendered = [False, False]
 
 cols = st.columns([0.5,2])
 
@@ -112,8 +112,10 @@ with cols[0]:
                     """,unsafe_allow_html=True)
 
 with cols[1]:
-    if not st.session_state.rendered:
-        btn_container = st.empty()
+
+    btn_container = st.empty()
+
+    if not all(st.session_state.rendered):
         btn = btn_container.button(
             "Click here to load", 
             use_container_width=True,
@@ -123,15 +125,15 @@ with cols[1]:
         btn = True
 
     if btn:
-        st.session_state.rendered = True
-        btn_container.empty()
+        # btn_container.empty()
 
-    subcols = st.columns(2)
-    with subcols[0]:
-        container_min = st.container()
-        # visible_layer_min = st.checkbox("Show layer?", True, key="chk_min")
+        subcols = btn_container.columns(2)
+
+        # with Pool() as pool:
+        #     earths = pool.map(stpv_add_raster, TIFF.values())
+        earths = [stpv_add_raster(r) for r in TIFF.values()]        
+        earth_min, earth_max = earths
         
-        earth_min = stpv_add_raster(TIFF["Min"])
         # earth_min.actors['Temperature'].visibility = visible_layer_min
         earth_min.add_text(
             "🌎 Minimum",
@@ -140,9 +142,20 @@ with cols[1]:
             font_size=16,
             shadow=True,
         )
-        if st.session_state.rendered:
-            with container_min:
-                with st.spinner("Loading..."):
+
+        # earth_max.actors['Temperature'].visibility = visible_layer_2
+        earth_max.add_text(
+                "🌎 Maximum",
+                position="upper_left",
+                color="w",
+                font_size=16,
+                shadow=True,
+            )
+        
+        with subcols[0]:
+            
+            if not st.session_state.rendered[0]:
+                with st.spinner("🌎🌍🌏..."):
                     stpyvista(
                         earth_min,
                         panel_kwargs=dict(
@@ -150,24 +163,13 @@ with cols[1]:
                             interactive_orientation_widget=True
                         )
                     )
-        
-    with subcols[1]:
-        container_max = st.container()
-        # visible_layer_2 = st.checkbox("Show layer?", True, key="chk_max")
-        
-        earth_max = stpv_add_raster(TIFF["Max"])
-        # earth_max.actors['Temperature'].visibility = visible_layer_2
-        earth_max.add_text(
-            "🌎 Maximum",
-            position="upper_left",
-            color="w",
-            font_size=16,
-            shadow=True,
-        )
+                st.session_state.rendered[0] = True
+                
 
-        if st.session_state.rendered:
-            with container_max:
-                with st.spinner("Loading..."):
+        with subcols[1]:
+            
+            if not st.session_state.rendered[1]:
+                with st.spinner("🌎🌍🌏..."):
                     stpyvista(
                         earth_max,
                         panel_kwargs=dict(
@@ -175,3 +177,6 @@ with cols[1]:
                             interactive_orientation_widget=True
                         )
                     )
+                
+                st.session_state.rendered[1] = True
+            
