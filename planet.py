@@ -93,6 +93,12 @@ if "rendered" not in st.session_state:
 cols = st.columns([0.5,2]) if not IS_APP_EMBED else st.columns([1,0.01])
 
 with cols[0]:
+    if IS_APP_EMBED:
+        st.markdown(
+            """<p class="embed_message" style="text-align:right;">Launch <b>fullscreen</b> to explore &emsp; <b>⇲</b></>""",
+            unsafe_allow_html=True
+        )
+        
     with st.expander("▛", expanded=True):
         st.title("🧊 + 🌎")
         st.header("`stpyvista` + `geovista`")
@@ -113,10 +119,7 @@ with cols[0]:
             <p style="text-align:right;">▟</>
                     """,unsafe_allow_html=True)
     
-    if IS_APP_EMBED:
-        st.markdown("""
-            <p class="embed_message" style="text-align:right;">Launch <b>fullscreen</b> to explore &emsp; <b>⇲</b></>
-                    """,unsafe_allow_html=True)
+
 
 if not IS_APP_EMBED:
     with cols[1]:
