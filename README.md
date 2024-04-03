@@ -9,3 +9,7 @@
 <p align="center">
 <a href="https://geovista.streamlit.app/"><img alt="stpyvista examples and documentation" src="https://img.shields.io/static/v1?label=%20&message=Open%20in%20Community%20Cloud&color=pink&logo=streamlit" width=200></a> 
 </p>
+
+<p align="center">
+<img src="./assets/geovista.gif" alt="Screen recording of stpyvista and geovista">
+</p>
