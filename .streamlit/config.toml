@@ -1,10 +1,10 @@
 [browser]
-gatherUsageStats = true
+gatherUsageStats = false
 
 [server]
 maxUploadSize = 5
 
 [theme]
 base="dark"
-primaryColor="#F63310"
+primaryColor="#406CCF"
 font="sans serif"

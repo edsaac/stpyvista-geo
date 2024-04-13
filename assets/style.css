@@ -76,6 +76,14 @@ header[data-testid="stHeader"]{
     animation-duration: 2s;
 }
 
+header[data-testid="stHeader"]{
+    display: none;
+}
+
+div[data-testid="stAppViewBlockContainer"]{
+    padding-top: 2rem;
+}
+
 /* .stSpinner{
     margin-top: 20%;
 }
