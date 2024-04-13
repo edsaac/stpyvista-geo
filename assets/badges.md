@@ -1,8 +1,0 @@
-<div id="fixedbadges" style="position:fixed; bottom: 1%; left:1%;">
-<br>
-<a href="https://github.com/edsaac/stpyvista"><img alt="stpyvista source code" src="https://img.shields.io/static/v1?label=:&message=stpyvista&color=informational&logo=github"></a>
-<br>
-<a href="https://github.com/bjlittle/geovista"><img alt="geovista source code" src="https://img.shields.io/static/v1?label=:&message=geovista&color=green&logo=github"></a>
-<br>
-<a href="https://stpyvista.streamlit.app"><img alt="Launch stpyvista in Streamlit" src="https://img.shields.io/static/v1?label=:&message=More%20examples&color=pink&logo=streamlit"></a>
-</div>

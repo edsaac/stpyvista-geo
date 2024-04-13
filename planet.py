@@ -113,8 +113,8 @@ def main():
         st.session_state.started_xvfb = True
 
     # Add badges to sidebar
-    with open("assets/badges.md") as f:
-        st.html(f"""{f.read()}""")
+    with open("assets/badges.html") as f:
+        st.markdown(f"{f.read()}", unsafe_allow_html=True)
 
     if "rendered" not in st.session_state:
         st.session_state.rendered = False
