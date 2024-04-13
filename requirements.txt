@@ -6,6 +6,6 @@ panel==1.3.8
 bokeh
 param
 pyvista
-geovista
+geovista==0.3.0
 stpyvista
 rasterio

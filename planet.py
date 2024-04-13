@@ -37,7 +37,7 @@ def get_grid(filename: str):
 
 @st.cache_resource(show_spinner=False)
 def stpv_build_geoplotter(dummy: str = "planet"):
-    plotter = gv.GeoPlotter(shape=[1, 2])
+    plotter = gv.GeoPlotter(shape=[1, 2], off_screen=True)
     plotter.window_size = [800, 500]
     plotter.set_background("#0e1117")
 
@@ -108,9 +108,9 @@ def embedded():
 
 
 def main():
-    if "IS_XVFB_RUNNING" not in st.session_state:
+    if "started_xvfb" not in st.session_state:
         start_xvfb()
-        st.session_state.IS_XVFB_RUNNING = True
+        st.session_state.started_xvfb = True
 
     # Add badges to sidebar
     with open("assets/badges.md") as f:
