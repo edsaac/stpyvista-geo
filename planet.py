@@ -82,11 +82,13 @@ def stpv_build_geoplotter(dummy: str = "planet"):
 
 def add_info():
     with st.expander("▛", expanded=True):
-        st.title("🧊 + 🌎")
-        st.header("`stpyvista` + `geovista`")
-        "##### Show PyVista 3D visualizations in Streamlit"
-        "***"
-        "## 🧑‍🎄"
+        st.title("🧊 + 🌎", anchor=False)
+        st.header("`stpyvista` + `geovista`", anchor=False)
+        st.markdown("**Show PyVista 3D visualizations in Streamlit**")
+
+        st.divider()
+
+        st.header("🧑‍🎄", anchor=False)
         st.markdown("**CONUS Temperature** \n **on Christmas Eve**")
 
         st.caption(
@@ -132,6 +134,7 @@ def main():
                 "Click here to load",
                 use_container_width=True,
                 help="This might take a while depending on your device",
+                type="primary",
             )
 
         else:

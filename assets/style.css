@@ -18,14 +18,6 @@ h3 {
     margin-right: 20%;
 }
 
-h5 {
-    font-size: 0.9rem;
-    text-align: center;
-    top: 0;
-    margin-left: 20%;
-    margin-right: 20%;
-}
-
 p{
     font-size: 0.9rem;
     text-align: center;
@@ -46,6 +38,7 @@ section.main div[data-testid="block-container"]{
 
 header[data-testid="stHeader"]{
     visibility: hidden;
+    display: none;
 }
 
 [data-testid="stCaptionContainer"]{
@@ -74,10 +67,6 @@ header[data-testid="stHeader"]{
 .embed_message{
     animation-name: emphasis;
     animation-duration: 2s;
-}
-
-header[data-testid="stHeader"]{
-    display: none;
 }
 
 div[data-testid="stAppViewBlockContainer"]{
