@@ -7,5 +7,5 @@ bokeh
 param
 pyvista
 geovista==0.3.0
-stpyvista
+stpyvista>=0.1.4
 rasterio
