@@ -18,58 +18,59 @@ h3 {
     margin-right: 20%;
 }
 
-p{
+p {
     font-size: 0.9rem;
     text-align: center;
     line-height: 95%;
 }
 
-[data-testid='stSidebarNav'] > ul {
+[data-testid='stSidebarNav']>ul {
     min-height: 60vh;
 }
 
-iframe[title='stpyvista.stpyvista']{
+iframe[title='stpyvista.stpyvista'] {
     border-radius: 10px;
 }
 
-section.main div[data-testid="block-container"]{
+section.main div[data-testid="stMainBlockContainer"] {
     padding-top: 1rem;
 }
 
-header[data-testid="stHeader"]{
+header[data-testid="stHeader"] {
     visibility: hidden;
     display: none;
 }
 
-[data-testid="stCaptionContainer"]{
+[data-testid="stCaptionContainer"] {
     opacity: 0.5;
     font-size: 0.7rem;
     line-height: 95%;
     transition: all .2s ease-in-out;
 }
 
-[data-testid="stCaptionContainer"]:hover{
+[data-testid="stCaptionContainer"]:hover {
     opacity: 1;
-    transform: scale(1.2); 
+    transform: scale(1.2);
 }
 
 @keyframes emphasis {
-    from{ 
+    from {
         opacity: 0.4;
         margin-right: 15%;
     }
-    to{
+
+    to {
         opacity: 1;
         margin-right: 0%;
     }
 }
 
-.embed_message{
+.embed_message {
     animation-name: emphasis;
     animation-duration: 2s;
 }
 
-div[data-testid="stAppViewBlockContainer"]{
+div[data-testid="stAppViewBlockContainer"] {
     padding-top: 2rem;
 }
 
