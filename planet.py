@@ -92,9 +92,14 @@ def add_info():
         st.markdown("**CONUS Temperature** \n **on Christmas Eve**")
 
         st.caption(
-            "Data from <br /> [NOOA National Weather Service](https://www.cpc.ncep.noaa.gov/products/GIS/GIS_DATA/)",
+            "Data from <br /> [NOAA National Weather Service](https://www.cpc.ncep.noaa.gov/products/GIS/GIS_DATA/)",
             unsafe_allow_html=True,
         )
+
+        st.divider()
+
+        # Add badges
+        st.html("assets/badges.html")
 
         st.html("""<p style="text-align:right;">▟</>""")
 
@@ -113,10 +118,6 @@ def main():
     if "started_xvfb" not in st.session_state:
         start_xvfb()
         st.session_state.started_xvfb = True
-
-    # Add badges to sidebar
-    with open("assets/badges.html") as f:
-        st.markdown(f"{f.read()}", unsafe_allow_html=True)
 
     if "rendered" not in st.session_state:
         st.session_state.rendered = False
@@ -176,12 +177,12 @@ if __name__ == "__main__":
         initial_sidebar_state="collapsed",
     )
 
-    # Add some styling with CSS selectors
-    with open("assets/style.css") as f:
-        st.html(f"<style>{f.read()}</style>")
-
     if is_the_app_embedded():
         embedded()
 
     else:
         main()
+
+    # Add some styling with CSS selectors
+    with open("assets/style.css") as f:
+        st.html(f"<style>{f.read()}</style>")

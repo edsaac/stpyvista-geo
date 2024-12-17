@@ -32,7 +32,7 @@ iframe[title='stpyvista.stpyvista'] {
     border-radius: 10px;
 }
 
-section.main div[data-testid="stMainBlockContainer"] {
+section.stMain div[data-testid="stMainBlockContainer"] {
     padding-top: 1rem;
 }
 
@@ -73,24 +73,3 @@ header[data-testid="stHeader"] {
 div[data-testid="stAppViewBlockContainer"] {
     padding-top: 2rem;
 }
-
-/* .stSpinner{
-    margin-top: 20%;
-}
- 
-.stSpinner div{
-    margin: 0 auto;
-} 
-
-.stSpinner i{
-    height: 3rem;
-    width: 3rem;
-    border-width: 0.8rem;
-    margin-left: auto;
-    margin-right: 0;
-}
-
-.stSpinner p{
-    font-size: 3rem;
-    line-height: 95%;
-} */
