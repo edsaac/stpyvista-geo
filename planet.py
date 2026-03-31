@@ -1,18 +1,28 @@
 import streamlit as st
 from time import sleep
 
+import pyvista as pv
 import geovista as gv
 import numpy as np
 import colorcet as cc  # noqa
 import rasterio
 
-from stpyvista.utils import is_the_app_embedded, start_xvfb
 from stpyvista import stpyvista
 
 TIFF = {
     "Min": "assets/tiff/us.tmin_nohads_ll_20231224_float.tif",
     "Max": "assets/tiff/us.tmax_nohads_ll_20231224_float.tif",
 }
+
+def is_the_app_embedded():
+    """Check if the app is embedded based on the query parameters"""
+    
+    from streamlit.runtime.scriptrunner import get_script_run_ctx
+    import urllib.parse as parse
+    
+    ctx = get_script_run_ctx()
+    query_params = parse.parse_qs(ctx.query_string)
+    return True if query_params.get("embed") else False
 
 ###############################################################################
 # Processing and caching
@@ -46,7 +56,7 @@ def stpv_build_geoplotter(dummy: str = "planet"):
 
     for i, (label, blob) in enumerate(zip(labels, blobs)):
         plotter.subplot(0, i)
-        plotter.add_base_layer(texture=gv.blue_marble())
+        # plotter.add_base_layer(texture=gv.natural_earth_1())
         plotter.add_graticule(mesh_args=dict(color="pink", opacity=0.4))
         plotter.add_coastlines(color="white", line_width=8, resolution="50m")
         plotter.view_xz(negative=False)
@@ -116,7 +126,7 @@ def embedded():
 
 def main():
     if "started_xvfb" not in st.session_state:
-        start_xvfb()
+        pv.start_xvfb()
         st.session_state.started_xvfb = True
 
     if "rendered" not in st.session_state:
@@ -155,7 +165,8 @@ def main():
                 with placeholder:
                     stpyvista(
                         earths,
-                        panel_kwargs=dict(
+                        backend="panel",
+                        backend_kwargs=dict(
                             orientation_widget=True,
                             interactive_orientation_widget=True,
                         ),
@@ -184,5 +195,4 @@ if __name__ == "__main__":
         main()
 
     # Add some styling with CSS selectors
-    with open("assets/style.css") as f:
-        st.html(f"<style>{f.read()}</style>")
+    st.html("assets/style.css")
