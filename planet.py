@@ -1,9 +1,17 @@
+import os
 import streamlit as st
+
 from time import sleep
 
+if "vtk_environment" not in st.session_state:
+    os.environ["VTK_USE_X"] = "OFF"
+    os.environ["VTK_DEFAULT_OPENGL_WINDOW"] = "vtkOSOpenGLRenderWindow"
+    st.session_state["vtk_environment"] = True
+    
+
+import numpy as np
 import pyvista as pv
 import geovista as gv
-import numpy as np
 import colorcet as cc  # noqa
 import rasterio
 
