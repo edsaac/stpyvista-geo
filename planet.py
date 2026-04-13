@@ -133,9 +133,6 @@ def embedded():
 
 
 def main():
-    if "started_xvfb" not in st.session_state:
-        pv.start_xvfb()
-        st.session_state.started_xvfb = True
 
     if "rendered" not in st.session_state:
         st.session_state.rendered = False
